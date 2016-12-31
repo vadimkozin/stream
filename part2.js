@@ -1,7 +1,7 @@
 "use strict";
-const fs        = require('fs');
-let crypto      = require('crypto');
-const Transform = require('stream').Transform;
+const fs        = require("fs");
+let crypto      = require("crypto");
+const Transform = require("stream").Transform;
 
 const input = fs.createReadStream("input.txt");
 const output = fs.createWriteStream("output.txt");
@@ -13,8 +13,8 @@ class CCrypto extends Transform {
         this.hash = hash;
         this.digest = digest;
 
-        if  (['latin1', 'hex', 'base64'].indexOf(digest) == -1) {
-            this.digest = 'hex';
+        if  (["latin1", "hex", "base64"].indexOf(digest) == -1) {
+            this.digest = "hex";
         }
     }
 
@@ -42,11 +42,11 @@ output.on("error", (err) => {
 });
 
 
-const md5 = crypto.createHash('md5');
-let p = input.pipe(new CCrypto(md5, 'hex'));
+const md5 = crypto.createHash("md5");
+let p = input.pipe(new CCrypto(md5, "hex"));
 p.pipe(output);
 p.pipe(process.stdout);
-p.on('finish', () => console.log('\n.'));
+p.on("finish", () => console.log("\n."));
 
 
 

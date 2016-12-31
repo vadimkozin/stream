@@ -49,10 +49,10 @@ class CWrite extends Writable {
 }
 
 /**
- * Добавление символа(строки) к данным с задержкой в 1 сек
+ * Добавление суффикса к данным с задержкой в 1 сек
  * @param {String} add добавляемая строка 
  */
-class CAddChar extends Transform {
+class CAddSuffix extends Transform {
     constructor(add, options={}) {
         super(options);
         this.add = add;
@@ -69,7 +69,7 @@ function handleError (err) {
 
 (new CGeneratorRandomNumber(1, 100))
     .on("error", (e) => handleError(e))
-    .pipe(new CAddChar('.'))
+    .pipe(new CAddSuffix("."))
     .on("error", (e) => handleError(e))
     .pipe(new CWrite())
     .on("error", (e) => handleError(e));
